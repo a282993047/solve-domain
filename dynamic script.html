@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript">
+        function loadScript(url, func) {
+            var head = document.head || document.getElementsByTagName('head')[0];
+            var script = document.createElement('script');
+            script.src = url;
+
+            script.onload = script.onreadystatechange = function(){
+                if(!this.readyState || this.readyState=='loaded' || this.readyState=='complete'){ //判断script节点是否加载完毕
+                    func();
+                    script.onload = script.onreadystatechange = null;
+                }
+            };
+
+            head.insertBefore(script, document.head.firstChild);
+        }
+        window.baidu = {
+            sug: function(data){
+                console.log(data);
+            }
+        }
+        loadScript('http://suggestion.baidu.com/su?wd=w',function(){console.log('loaded')})
+    </script>
+</head>
+<body>
+
+</body>
+</html>

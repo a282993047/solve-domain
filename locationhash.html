@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript">
+        //a.html传数据给b.html
+        //b.html
+        try {
+            parent.location.hash = 'data';
+        } catch (e) {
+            // ie、chrome的安全机制无法修改parent.location.hash，
+            var ifrproxy = document.createElement('iframe');
+            ifrproxy.style.display = 'none';
+            ifrproxy.src = "http://www.baidu.com/proxy.html#data";
+            document.body.appendChild(ifrproxy);
+        }
+
+        //b创建的iframe
+        //因为parent.parent（即baidu.com/a.html）和baidu.com/proxy.html属于同一个域，所以可以改变其location.hash的值
+        parent.parent.location.hash = self.location.hash.substring(1);
+    </script>
+</head>
+<body>
+
+</body>
+</html>
